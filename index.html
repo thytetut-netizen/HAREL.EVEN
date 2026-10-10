@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f0e7">
+  <meta name="description" content="EVEN — considered everyday pieces, made for the spaces between.">
+  <title>EVEN — Considered everyday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f5f0e7; --white: #fbf8f2; --ink: #2b1f18; --muted: #78695d; --line: #d8caba; --beige: #e9dfd2;
+      --pop: #2338ff;
+      --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+      --sans: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+      --page: min(1440px, calc(100% - 112px));
+    }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 88px; scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 14px; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9000; opacity: .07; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+    button, a { color: inherit; font: inherit; }
+    a { text-decoration: none; }
+    button { border: 0; }
+    img { display: block; max-width: 100%; }
+    ::selection { background: var(--pop); color: #fff; }
+    :focus-visible { outline: 2px solid var(--pop); outline-offset: 3px; }
+    [hidden] { display: none !important; }
+
+    /* Intro: one orchestrated moment */
+    .intro-screen { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; background: var(--ink); animation: curtain 1.9s cubic-bezier(.77,0,.18,1) forwards; }
+    .intro-wordmark { display: flex; color: var(--paper); font-family: var(--display); font-size: clamp(72px, 18vw, 200px); font-weight: 800; letter-spacing: -.04em; line-height: 1; overflow: hidden; }
+    .intro-wordmark span { display: inline-block; transform: translateY(110%); animation: rise .7s cubic-bezier(.2,.8,.2,1) forwards; }
+    .intro-wordmark span:nth-child(2) { animation-delay: .08s; }
+    .intro-wordmark span:nth-child(3) { animation-delay: .16s; }
+    .intro-wordmark span:nth-child(4) { animation-delay: .24s; }
+    @keyframes rise { to { transform: none; } }
+    @keyframes curtain { 0%, 62% { clip-path: inset(0 0 0 0); } 100% { clip-path: inset(0 0 100% 0); visibility: hidden; } }
+
+    .wrap { width: var(--page); margin-inline: auto; }
+    .site-header { position: sticky; top: 0; height: 74px; z-index: 50; display: flex; align-items: center; background: color-mix(in srgb, var(--paper) 82%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .header-inner { width: var(--page); margin: auto; display: flex; align-items: center; justify-content: space-between; }
+    .wordmark { font-family: var(--display); font-size: 26px; font-weight: 800; letter-spacing: -.04em; }
+    .desktop-nav { display: flex; gap: 38px; }
+    .nav-link { position: relative; font-size: 12px; font-weight: 600; letter-spacing: .08em; padding: 6px 0; }
+    .nav-link::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: var(--pop); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+    .nav-link:hover::after { transform: scaleX(1); }
+    .menu-toggle, .mobile-nav { display: none; }
+
+    /* Hero */
+    .hero { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; padding: 44px 0 70px; min-height: 640px; }
+    .hero-copy { position: relative; z-index: 2; }
+    .eyebrow { color: var(--muted); font-size: 12px; letter-spacing: .04em; }
+    .hero h1 { margin: 22px 0 18px; font-family: var(--display); font-size: clamp(64px, 10.5vw, 168px); line-height: .84; letter-spacing: -.055em; font-weight: 800; }
+    .hero h1 span { display: block; }
+    .hero h1 .outline { color: transparent; -webkit-text-stroke: 2px var(--ink); margin-left: .35em; }
+    .hero-subtitle { max-width: 340px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
+    .button-link { display: inline-flex; align-items: center; gap: 18px; margin-top: 34px; padding: 17px 24px; border-radius: 999px; background: var(--ink); color: var(--white); font-size: 13px; font-weight: 600; transition: background .25s, transform .25s; }
+    .button-link:hover { background: var(--pop); transform: translateY(-2px); }
+    .button-link .arrow { display: inline-block; transition: transform .25s; }
+    .button-link:hover .arrow { transform: translate(3px, -3px); }
+    .hero-image { position: relative; height: 560px; overflow: hidden; border-radius: 260px 260px 0 0; background: var(--beige); }
+    .hero-image img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; object-position: 50% 44%; transform: scale(1.08); animation: settle 2.4s .9s cubic-bezier(.2,.8,.2,1) forwards; }
+    @keyframes settle { to { transform: scale(1); } }
+    .badge { position: absolute; z-index: 3; right: -10px; bottom: 46px; width: 128px; height: 128px; border-radius: 50%; background: var(--pop); color: #fff; display: grid; place-items: center; animation: spin 18s linear infinite; }
+    .badge svg { width: 100%; height: 100%; }
+    .badge text { fill: #fff; font-family: var(--sans); font-size: 11.5px; font-weight: 600; letter-spacing: .18em; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Marquee */
+    .marquee { background: var(--ink); color: var(--paper); overflow: hidden; white-space: nowrap; padding: 18px 0; }
+    .marquee-track { display: inline-flex; animation: scroll 28s linear infinite; }
+    .marquee-track span { font-family: var(--display); font-size: clamp(22px, 3vw, 34px); font-weight: 700; letter-spacing: -.02em; padding-right: 40px; }
+    .marquee-track i { font-style: normal; color: var(--pop); filter: brightness(1.6); padding-right: 40px; }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+
+    /* Products */
+    .section { padding: 90px 0 100px; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 40px; gap: 20px; }
+    .section-heading h2 { margin: 12px 0 0; font-family: var(--display); font-size: clamp(40px, 6vw, 88px); font-weight: 800; letter-spacing: -.05em; line-height: .95; }
+    .count { color: var(--muted); font-size: 13px; padding-bottom: 8px; }
+    .product-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 22px; row-gap: 56px; }
+    .product-card { display: block; text-align: left; padding: 0; width: 100%; background: transparent; cursor: pointer; }
+    .product-photo { display: block; aspect-ratio: 1; position: relative; overflow: hidden; background: var(--beige); border-radius: 6px; }
+    .product-photo img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; transition: opacity .45s ease, transform .9s cubic-bezier(.2,.8,.2,1); }
+    .product-photo img.product-image--hover { opacity: 0; }
+    .view-pill { position: absolute; z-index: 2; left: 16px; bottom: 16px; padding: 10px 16px; border-radius: 999px; background: var(--paper); font-size: 12px; font-weight: 600; transform: translateY(14px); opacity: 0; transition: transform .35s ease, opacity .35s ease; }
+    @media (hover: hover) and (pointer: fine) {
+      .product-card:hover .product-photo img.product-image--hover { opacity: 1; }
+      .product-card:hover .product-photo img { transform: scale(1.04); }
+      .product-card:hover .view-pill { transform: none; opacity: 1; }
+    }
+    .product-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-top: 16px; }
+    .product-name { font-family: var(--display); font-size: 22px; font-weight: 700; letter-spacing: -.03em; }
+    .product-price { font-size: 15px; font-weight: 500; }
+
+    /* About */
+    .about { background: var(--pop); color: #fff; padding: 110px 0 120px; }
+    .about-inner { width: var(--page); margin: auto; display: grid; grid-template-columns: .5fr 1.5fr; gap: 8%; align-items: start; }
+    .about h2 { font-size: 13px; font-weight: 500; margin: 14px 0 0; opacity: .8; }
+    .statement { margin: 0; font-family: var(--display); font-size: clamp(34px, 5.6vw, 84px); line-height: 1; letter-spacing: -.05em; font-weight: 700; }
+
+    /* Footer */
+    .footer { padding: 40px 0 0; overflow: hidden; }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+    .social-link { font-size: 13px; font-weight: 500; }
+    .social-link:hover { color: var(--pop); }
+    .spotify-section { margin-top: 36px; padding: 28px 0 20px; border-top: 1px solid var(--line); max-width: 640px; }
+    .spotify-title { margin: 0; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .spotify-track { margin: 8px 0 14px; font-size: 15px; line-height: 1.5; }
+    .spotify-frame { display: block; width: 100%; height: 152px; border: 0; border-radius: 12px; background: var(--beige); }
+    .footer-giant { font-family: var(--display); font-weight: 800; font-size: 31vw; line-height: .72; letter-spacing: -.06em; text-align: center; color: var(--ink); margin: 40px 0 -2vw; user-select: none; }
+    .footer-bottom { display: flex; justify-content: space-between; padding: 18px 0; color: var(--muted); font-size: 11px; position: relative; background: var(--paper); }
+
+    /* Product page */
+    .product-page { min-height: calc(100vh - 74px); padding: 30px 0 100px; }
+    .back-link { display: inline-flex; gap: 10px; align-items: center; color: var(--muted); font-size: 13px; padding: 10px 0 24px; background: transparent; cursor: pointer; }
+    .back-link:hover { color: var(--pop); }
+    .detail-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 8%; align-items: start; }
+    .detail-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .detail-gallery img:first-child { grid-column: 1 / -1; }
+    .detail-gallery.single { grid-template-columns: 1fr; max-width: 520px; }
+    .detail-gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--beige); border-radius: 6px; }
+    .detail-info { position: sticky; top: 110px; padding-top: 18px; }
+    .detail-info h1 { margin: 14px 0 10px; font-family: var(--display); font-size: clamp(48px, 6.4vw, 96px); font-weight: 800; letter-spacing: -.06em; line-height: .92; }
+    .detail-price { font-size: 20px; font-weight: 500; }
+    .detail-description { max-width: 420px; margin: 24px 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
+    .detail-specs { border-top: 1px solid var(--line); margin-top: 26px; }
+    .detail-spec { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin: 0; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 500; }
+    .detail-spec strong { color: var(--muted); font-weight: 400; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+    .color-chip { display: inline-block; width: 14px; height: 14px; margin-right: 4px; border: 1px solid var(--line); border-radius: 50%; vertical-align: -2px; }
+    .size-chip { min-width: 42px; height: 42px; border-radius: 50%; background: transparent; border: 1px solid var(--line); font-weight: 500; cursor: pointer; transition: all .2s; }
+    .size-chip:hover { border-color: var(--ink); }
+    .size-chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+    @media (max-width: 900px) {
+      :root { --page: calc(100% - 56px); }
+      .hero { grid-template-columns: 1fr 1fr; gap: 24px; min-height: 0; }
+      .hero-image { height: 440px; }
+      .about-inner { gap: 5%; }
+    }
+    @media (max-width: 620px) {
+      :root { --page: calc(100% - 36px); }
+      html { scroll-padding-top: 80px; }
+      .site-header { height: 66px; }
+      .wordmark { font-size: 22px; }
+      .desktop-nav { display: none; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: flex-end; gap: 9px; min-width: 48px; min-height: 48px; padding: 8px 0 8px 10px; background: none; font-size: 12px; font-weight: 600; cursor: pointer; }
+      .menu-icon { width: 17px; display: grid; gap: 4px; }
+      .menu-icon span { display: block; height: 2px; width: 100%; background: var(--ink); }
+      .mobile-nav { position: absolute; top: 65px; left: 0; right: 0; padding: 8px 18px 14px; background: var(--paper); border-bottom: 1px solid var(--line); }
+      .mobile-nav.is-open { display: flex; flex-direction: column; }
+      .mobile-nav .nav-link { display: flex; align-items: center; min-height: 44px; font-size: 14px; }
+      .hero { display: flex; flex-direction: column-reverse; gap: 0; padding: 14px 0 46px; }
+      .hero-image { width: 100%; height: min(calc((100vw - 36px) * 1.05), 460px); border-radius: 200px 200px 0 0; }
+      .hero-copy { padding: 26px 0 0; }
+      .hero h1 { font-size: clamp(60px, 19vw, 90px); margin: 14px 0 14px; }
+      .hero h1 .outline { margin-left: .25em; -webkit-text-stroke-width: 1.5px; }
+      .hero-subtitle { font-size: 14px; }
+      .button-link { min-height: 48px; margin-top: 22px; }
+      .badge { width: 96px; height: 96px; right: 6px; bottom: 20px; }
+      .section { padding: 56px 0 64px; }
+      .section-heading { margin-bottom: 24px; }
+      .product-grid { column-gap: 12px; row-gap: 32px; }
+      .product-meta { display: block; padding-top: 10px; }
+      .product-name { font-size: 17px; }
+      .product-price { display: block; margin-top: 3px; font-size: 13px; color: var(--muted); }
+      .about { padding: 64px 0 72px; }
+      .about-inner { grid-template-columns: 1fr; gap: 16px; }
+      .footer-top { align-items: flex-start; flex-direction: column; }
+      .social-link { display: inline-flex; align-items: center; min-height: 40px; }
+      .product-page { min-height: calc(100vh - 66px); padding-top: 12px; }
+      .back-link { min-height: 44px; }
+      .detail-layout { display: flex; flex-direction: column; gap: 22px; }
+      .detail-gallery { gap: 8px; }
+      .detail-info { position: static; width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important; scroll-behavior: auto !important; }
+      .marquee-track { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="intro-screen" id="intro-screen" aria-hidden="true"><span class="intro-wordmark"><span>E</span><span>V</span><span>E</span><span>N</span></span></div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="#top" aria-label="EVEN home">EVEN</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a class="nav-link" href="#shop">Shop</a>
+        <a class="nav-link" href="#about">About</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="menu-icon" aria-hidden="true"><span></span><span></span></span><span>MENU</span>
+      </button>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+        <a class="nav-link" href="#shop">Shop</a>
+        <a class="nav-link" href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home-view">
+    <div class="wrap" id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow">Independent clothing by Harel</div>
+          <h1 id="hero-title"><span>Made for</span><span class="outline">every</span><span>day.</span></h1>
+          <p class="hero-subtitle">Easy pieces. Thoughtful details. Made to be worn often.</p>
+          <a class="button-link" href="#shop">Explore collection <span class="arrow" aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-image">
+          <img src="assets/hero-harel.png" alt="Monochrome portrait artwork with smoke">
+        </div>
+        <div class="badge" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><text><textPath href="#circ">EVEN • WORN OFTEN • EVEN • WORN OFTEN •</textPath></text></svg>
+        </div>
+      </section>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Made for every day</span><i>✦</i><span>Easy pieces</span><i>✦</i><span>Thoughtful details</span><i>✦</i><span>Worn often</span><i>✦</i>
+        <span>Made for every day</span><i>✦</i><span>Easy pieces</span><i>✦</i><span>Thoughtful details</span><i>✦</i><span>Worn often</span><i>✦</i>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <section class="section" id="shop" aria-labelledby="shop-title">
+        <div class="section-heading">
+          <div><div class="eyebrow">The collection</div><h2 id="shop-title">Everyday pieces</h2></div>
+          <div class="count" id="product-count"></div>
+        </div>
+        <div class="product-grid" id="product-grid"></div>
+      </section>
+    </div>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="about-inner">
+        <h2 id="about-title">A little about us</h2>
+        <p class="statement">EVEN makes easy everyday pieces with a little more meaning.</p>
+      </div>
+    </section>
+  </main>
+
+  <main class="wrap product-page" id="product-view" hidden aria-live="polite">
+    <button class="back-link" id="back-link" type="button"><span aria-hidden="true">←</span> Back to collection</button>
+    <div class="detail-layout" id="detail-content"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="wordmark" href="#top">EVEN</a>
+        <nav class="footer-links" aria-label="Social and contact links">
+          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram ↗</a>
+          <a class="social-link" href="https://www.tiktok.com/@harel1203" target="_blank" rel="noopener noreferrer">TikTok ↗</a>
+          <a class="social-link" href="mailto:hello@even.studio">Contact ↗</a>
+        </nav>
+      </div>
+      <section class="spotify-section" aria-labelledby="spotify-title">
+        <h2 class="spotify-title" id="spotify-title">Now playing</h2>
+        <p class="spotify-track" lang="he" dir="rtl">פנים יפות — רון עשהאל</p>
+        <iframe class="spotify-frame" title="Spotify player: פנים יפות — רון עשהאל" src="https://open.spotify.com/embed/track/33A3wJQkAAthK5AS5lcdmj" width="100%" height="152" loading="lazy" allow="encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </section>
+    </div>
+    <div class="footer-giant" aria-hidden="true">EVEN</div>
+    <div class="footer-bottom wrap"><span>© 2026 EVEN</span><span>Made for every day</span></div>
+  </footer>
+
+  <script>
+    // Product photos are local files in the assets folder and can be replaced independently.
+    const products = [
+      {
+        slug: "shirt1", name: "SHIRT1", price: "$58",
+        image: "assets/Gemini_Generated_Image_ygv2gaygv2gaygv2.jpg", imageAlt: "Front view of SHIRT1 in white",
+        detailImage: "assets/Gemini_Generated_Image_6otlfx6otlfx6otl.jpg", detailAlt: "Back view of SHIRT1 with an EVEN label",
+        additionalImages: [{ src: "assets/Gemini_Generated_Image_c4o06hc4o06hc4o0.jpg", alt: "Additional front view of SHIRT1" }],
+        color: "White", swatch: "#f8f8f5", sizes: ["S", "M", "L", "XL"],
+        description: "A relaxed white cotton tee with a bold graphic on the front and a quiet EVEN label on the back."
+      },
+      {
+        slug: "shirt2", name: "SHIRT2", price: "$58",
+        image: "assets/product-2-image-1.jpg", imageAlt: "Front view of SHIRT2 in white",
+        detailImage: "assets/product-2-image-2.jpg", detailAlt: "Back view of SHIRT2 in white",
+        color: "White", swatch: "#f8f8f5", sizes: ["S", "M", "L", "XL"],
+        description: "A relaxed white cotton tee with black graphic artwork on the front and back."
+      },
+    ];
+
+    const grid = document.getElementById("product-grid");
+    const homeView = document.getElementById("home-view");
+    const productView = document.getElementById("product-view");
+    const detailContent = document.getElementById("detail-content");
+    const mobileNav = document.getElementById("mobile-nav");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const introScreen = document.getElementById("intro-screen");
+
+    introScreen.addEventListener("animationend", function() { introScreen.remove(); });
+    document.getElementById("product-count").textContent = products.length + " pieces";
+
+    function renderGrid() {
+      grid.innerHTML = products.map(function(product) {
+        return '<button class="product-card" type="button" data-product="' + product.slug + '" aria-label="View ' + product.name + '">' +
+          '<span class="product-photo"><img class="product-image--primary" loading="lazy" src="' + product.image + '" alt="' + product.imageAlt + '">' +
+          (product.detailImage ? '<img class="product-image--hover" loading="lazy" src="' + product.detailImage + '" alt="" aria-hidden="true">' : '') +
+          '<span class="view-pill" aria-hidden="true">View piece ↗</span></span>' +
+          '<span class="product-meta"><span class="product-name">' + product.name + '</span><span class="product-price">' + product.price + '</span></span>' +
+          '</button>';
+      }).join("");
+    }
+
+    function showHome(shouldScroll) {
+      homeView.hidden = false;
+      productView.hidden = true;
+      document.title = "EVEN — Considered everyday";
+      closeMenu();
+      if (shouldScroll && location.hash && location.hash.charAt(1) !== "/") {
+        const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (target) requestAnimationFrame(function() { target.scrollIntoView(); });
+      }
+    }
+
+    function showProduct(slug) {
+      const product = products.find(function(item) { return item.slug === slug; });
+      if (!product) { showHome(false); return; }
+      homeView.hidden = true;
+      productView.hidden = false;
+      document.title = product.name + " — EVEN";
+      closeMenu();
+      const galleryImages = [{ src: product.image, alt: product.imageAlt }];
+      if (product.detailImage) galleryImages.push({ src: product.detailImage, alt: product.detailAlt });
+      (product.additionalImages || []).forEach(function(image) { galleryImages.push(image); });
+      detailContent.innerHTML =
+        '<div class="detail-gallery' + (galleryImages.length === 1 ? ' single' : '') + '">' +
+        galleryImages.map(function(image) { return '<img src="' + image.src + '" alt="' + image.alt + '">'; }).join("") + '</div>' +
+        '<section class="detail-info" aria-labelledby="detail-title"><div class="eyebrow">EVEN</div><h1 id="detail-title">' + product.name + '</h1><div class="detail-price">' + product.price + '</div>' +
+        '<p class="detail-description">' + product.description + '</p>' +
+        '<div class="detail-specs"><p class="detail-spec"><span>Color</span><strong><span class="color-chip" style="background:' + product.swatch + '" aria-hidden="true"></span>' + product.color + '</strong></p>' +
+        '<div class="detail-spec"><span>Size</span><strong>' + product.sizes.map(function(s) { return '<button class="size-chip" type="button" aria-pressed="false">' + s + '</button>'; }).join("") + '</strong></div></div></section>';
+      window.scrollTo(0, 0);
+    }
+
+    function renderFromLocation(scrollToAnchor) {
+      const match = location.hash.match(/^#\/product\/([^/]+)$/);
+      if (match) showProduct(decodeURIComponent(match[1]));
+      else showHome(scrollToAnchor);
+    }
+
+    function closeMenu() {
+      mobileNav.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.querySelector("span:last-child").textContent = "MENU";
+    }
+
+    grid.addEventListener("click", function(event) {
+      const card = event.target.closest("[data-product]");
+      if (!card) return;
+      const slug = card.getAttribute("data-product");
+      history.pushState({ product: slug }, "", "#/product/" + slug);
+      showProduct(slug);
+    });
+
+    detailContent.addEventListener("click", function(event) {
+      const chip = event.target.closest(".size-chip");
+      if (!chip) return;
+      detailContent.querySelectorAll(".size-chip").forEach(function(c) { c.setAttribute("aria-pressed", String(c === chip)); });
+    });
+
+    document.getElementById("back-link").addEventListener("click", function() {
+      if (history.state && history.state.product) history.back();
+      else { history.pushState({}, "", "#shop"); renderFromLocation(true); }
+    });
+
+    menuToggle.addEventListener("click", function() {
+      const open = menuToggle.getAttribute("aria-expanded") !== "true";
+      menuToggle.setAttribute("aria-expanded", String(open));
+      mobileNav.classList.toggle("is-open", open);
+      menuToggle.querySelector("span:last-child").textContent = open ? "CLOSE" : "MENU";
+    });
+
+    mobileNav.addEventListener("click", function(event) {
+      if (event.target.closest("a")) closeMenu();
+    });
+
+    window.addEventListener("popstate", function() { renderFromLocation(true); });
+    window.addEventListener("hashchange", function() { renderFromLocation(true); });
+
+    renderGrid();
+    renderFromLocation(false);
+  </script>
+</body>
+</html>
